@@ -12,6 +12,6 @@ export class notifications {
   @Column()
   content: string;
 
-  @ManyToOne(() => User, (user) => user.id)
+  @ManyToOne(() => User, (user) => user.id, { nullable: true })
   user: User;
 }
