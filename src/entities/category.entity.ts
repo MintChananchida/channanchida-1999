@@ -1,20 +1,30 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 
-@Entity({ name: 'category' })
+@Entity()
 export class category {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column()
   name: string;
-
-  @ManyToOne(() => User, (user) => user.id, { nullable: true })
-  user: User;
 
   @Column({ type: 'enum', enum: ['income', 'expense'] })
   type: 'income' | 'expense';
 
+  @ManyToOne(() => User, (user) => user.id, { nullable: true })
+  user: User;
+
   @CreateDateColumn()
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

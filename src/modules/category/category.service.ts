@@ -16,7 +16,7 @@ export class CategoryService {
     const { userID, ...rest } = data;
     const entity = this.repo.create({
       ...rest,
-      user: { id: userID }
+      user: { id: userID },
     });
     return this.repo.save(entity);
   }
