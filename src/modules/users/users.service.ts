@@ -30,19 +30,21 @@ export class UsersService {
   }
 
   async findAll() {
-    const users = await this.repo.find();
-    return users.map(user => ({
-      ...user,
-      password: undefined, // Exclude password from the response
-    }));
+    const user = await this.repo.find();
+    return user.map((u) => {
+      return {
+        ...u,
+        password: undefined,
+      };
+    });
   }
 
   async findOne(id: number) {
-    let user = await this.repo.findOneBy({ id });
+    const user = await this.repo.findOneBy({ id });
     return {
       ...user,
-      password: undefined, // Exclude password from the response
-    }
+      password: undefined,
+    };
   }
 
   findByEmail(email: string) {
