@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { category } from 'src/entities/category.entity';
+import { Category } from 'src/entities/category.entity';
 import { Repository } from 'typeorm';
 import { CategoryDto } from './dto/create.dto';
 
 @Injectable()
 export class CategoryService {
-  constructor(@InjectRepository(category) private repo: Repository<category>) {}
+  constructor(@InjectRepository(Category) private repo: Repository<Category>) {}
 
   findAll() {
     return this.repo.find();
