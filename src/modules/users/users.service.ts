@@ -29,8 +29,12 @@ export class UsersService {
     };
   }
 
-  findAll() {
-    return this.repo.find();
+  async findAll() {
+    const users = await this.repo.find();
+    return users.map(user => ({
+      ...user,
+      password: undefined, // Exclude password from the response
+    }));
   }
 
   async findOne(id: number) {
