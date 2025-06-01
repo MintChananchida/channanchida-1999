@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/entities';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { User } from 'src/entities';
 
 @Injectable()
 export class UsersService {
@@ -33,8 +33,12 @@ export class UsersService {
     return this.repo.find();
   }
 
-  findOne(id: number) {
-    return this.repo.findOneBy({ id });
+  async findOne(id: number) {
+    let user = await this.repo.findOneBy({ id });
+    return {
+      ...user,
+      password: undefined, // Exclude password from the response
+    }
   }
 
   findByEmail(email: string) {
